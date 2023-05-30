@@ -11,4 +11,5 @@ public class Book
   public bool OnLoan { get; set; }
   public List<BookGenre> GenreJoinEntities { get; }
   public List<BookSubject> SubjectJoinEntities { get; }
+  public ApplicationUser User { get; set; }
 }
