@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Book
+
+<h2>Book Details</h2>
+
+@Html.DisplayNameFor(m => m.Title): @Html.DisplayFor(m => m.Title)
+
+@if(Model.AuthorJoinEntities.Count == 0)
+{
+  <p>Fart</p>
+}
+@foreach (AuthorBook authorBook in Model.AuthorJoinEntities)
+{
+  <p>Author: @authorBook.Author.Name</p>
+}
+<p>Year: @Html.DisplayFor(m => m.PubYear)</p>
+@if (!Model.OnLoan)
+{
+  <p>Available</p>
+}
+else
+{
+  <p>Checked Out, that sucks</p>
+}
+
