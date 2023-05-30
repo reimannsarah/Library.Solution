@@ -9,52 +9,62 @@ namespace Library.Controllers;
 
 public class BooksController : Controller
 {
-    private readonly LibraryContext _db;
+  private readonly LibraryContext _db;
 
-    public BooksController(LibraryContext db)
+  public BooksController(LibraryContext db)
+  {
+    _db = db;
+  }
+
+  public ActionResult Index()
+  {
+    return View();
+  }
+
+  public ActionResult Create()
+  {
+    ViewBag.Authors = _db.Authors.Select(a => new SelectListItem
     {
-        _db = db;
-    }
+      Value = a.AuthorId.ToString(),
+      Text = a.Name
+    }).ToList();
+    return View();
+  }
 
-    public ActionResult Index()
-    {
-        return View();
-    }
+  [HttpPost]
+  public ActionResult Create(Book book, string[] author)
+  {
+    // if (author.AuthorId == 0)
+    // {
 
-    public ActionResult Create()
-    {
-        ViewBag.Authors = _db.Authors.Select(a => new SelectListItem
-        {
-          Value = a.AuthorId.ToString(),
-          Text = a.Name
-        }).ToList();
-        return View();
-    }
-
-    [HttpPost]
-    public ActionResult Create(Book book, int authorId)
-    {
-      // if (authorId == 0)
-      // {
-
-      // }
+    // }
+    string AuthorName = author[0];
 #nullable enable
-        AuthorBook? joinEntity = _db.AuthorBooks.FirstOrDefault(join => (join.AuthorId == authorId && join.BookId == book.BookId));
+    Author? thisAuthor = _db.Authors.FirstOrDefault(author => author.Name == AuthorName);
 #nullable disable
-        if (joinEntity == null && authorId != 0)
-        {
-            _db.Books.Add(book);
-            _db.AuthorBooks.Add(new AuthorBook() { AuthorId = authorId, BookId = book.BookId });
-            _db.SaveChanges();
-        }
-        return RedirectToAction("Details", new { id = book.BookId });
-    }
+		if (thisAuthor == null)
+		{
+			_db.Authors.Add( new Author() { Name = AuthorName });
+			_db.SaveChanges();
+		}
+// #nullable enable
+//       AuthorBook? joinEntity = _db.AuthorBooks.FirstOrDefault(join => (join.AuthorId == thisAuthor.AuthorId && join.BookId == book.BookId));
+// #nullable disable
+//       if (joinEntity == null && thisAuthor.AuthorId != 0)
+//       {
+//         _db.Books.Add(book);
+//         _db.SaveChanges();
+//         _db.AuthorBooks.Add(new AuthorBook() { AuthorId = thisAuthor.AuthorId, BookId = book.BookId });
+//         _db.SaveChanges();
+//       }
+    return RedirectToAction("Details", new { id = book.BookId });
+  }
 
-    public ActionResult Details(int id)
-    {
-      Book thisBook = _db.Books.Include(book => book.AuthorJoinEntities)
-                              .ThenInclude(join => join.Author)
-                              .FirstOrDefault(book => book.BookId == id);
-      return View(thisBook);
-    }
+  public ActionResult Details(int id)
+  {
+    Book thisBook = _db.Books.Include(book => book.AuthorJoinEntities)
+                            .ThenInclude(join => join.Author)
+                            .FirstOrDefault(book => book.BookId == id);
+    return View(thisBook);
+  }
 }
