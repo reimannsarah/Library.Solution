@@ -25,6 +25,12 @@
   @Html.LabelFor(user=> user.ConfirmPassword)
   @Html.EditorFor(user=> user.ConfirmPassword)
 
+  @Html.LabelFor(user => user.Role)
+  <select name="Role">
+    <option value="Patron">Patron</option>
+    <option value="Librarian">Librarian</option>
+  </select>
+
   <input type="submit" value="Register" />
 }
 
