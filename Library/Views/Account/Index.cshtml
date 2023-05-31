@@ -2,10 +2,11 @@
   Layout = "_Layout";
 }
 
-<h2>Welcome Back</h2>
-<hr />
+
 @if (User.Identity.IsAuthenticated)
 {
+  <h2>Welcome Back</h2>
+  <hr />
   <p>Hello @User.Identity.Name!</p>
   @using (Html.BeginForm("LogOff", "Account"))
   {
@@ -20,4 +21,5 @@ else
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
 <p>@Html.ActionLink("Books", "Index", "Books")</p>
 <p>@Html.ActionLink("Authors", "Index", "Authors")</p>
+
 

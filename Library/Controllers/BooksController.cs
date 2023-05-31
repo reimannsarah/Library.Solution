@@ -36,10 +36,6 @@ public class BooksController : Controller
   [HttpPost]
   public ActionResult Create(Book book, string[] author)
   {
-    // if (author.AuthorId == 0)
-    // {
-
-    // }
     string AuthorName = author[0];
 #nullable enable
     Author? thisAuthor = _db.Authors.FirstOrDefault(author => author.Name == AuthorName);

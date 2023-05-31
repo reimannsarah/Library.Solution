@@ -8,11 +8,14 @@
 
 @Html.ActionLink("Add an Author", "Create")
 @Html.ActionLink("Add Book", "Create", "Books")
+@Html.ActionLink("Home", "Index", "Account")
 
 @foreach (var author in Model)
 {
   <p>@author.Name</p>
 }
+
+
 
 @* @using(Html.BeginForm())
 {

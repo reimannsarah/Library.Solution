@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Library.Models;
 using System.Threading.Tasks;
 using Library.ViewModels;
+using System.Security.Claims;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Library.Controllers
 {
@@ -23,6 +26,14 @@ namespace Library.Controllers
 
         public ActionResult Index()
         {
+            // string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            // ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            // var roles = await _userManager.GetRolesAsync(currentUser);
+            // var role = roles.FirstOrDefault();
+            // var viewModel = new LoginViewModel
+            // {
+            //     Role = role
+            // };
             return View();
         }
         public IActionResult Register()
@@ -73,6 +84,7 @@ namespace Library.Controllers
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    
                     return RedirectToAction("Index");
                 }
                 else
