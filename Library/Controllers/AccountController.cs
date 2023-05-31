@@ -11,11 +11,13 @@ namespace Library.Controllers
         private readonly LibraryContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, LibraryContext db)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> RoleMgr, LibraryContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = RoleMgr;
             _db = db;
         }
 
@@ -36,6 +38,7 @@ namespace Library.Controllers
             }
             else
             {
+                
                 ApplicationUser user = new ApplicationUser { UserName = model.Email };
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

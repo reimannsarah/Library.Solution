@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,6 +22,7 @@ public class BooksController : Controller
     return View();
   }
 
+  [Authorize(Roles = "librarian")]
   public ActionResult Create()
   {
     ViewBag.Authors = _db.Authors.Select(a => new SelectListItem

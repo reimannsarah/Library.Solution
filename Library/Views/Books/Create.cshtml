@@ -16,7 +16,7 @@
   <datalist id="authors">
   @foreach (var author in ViewBag.Authors)
   {
-    <option value="@author.Text"></option>
+    <option value="@author.Text">@author.Text</option>
   }
   </datalist>
   <input type="submit" value="Add" />

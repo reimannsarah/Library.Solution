@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,11 +23,13 @@ public class AuthorsController : Controller
     return View(model);
   }
 
+  [Authorize(Roles = "librarian")]
   public ActionResult Create()
   {
     return View();
   }
 
+  [Authorize(Roles = "librarian")]
   [HttpPost]
   public ActionResult Create(Author author)
   {
