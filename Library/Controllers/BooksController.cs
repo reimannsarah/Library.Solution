@@ -46,19 +46,20 @@ public class BooksController : Controller
 #nullable disable
 		if (thisAuthor == null)
 		{
-			_db.Authors.Add( new Author() { Name = AuthorName });
+      thisAuthor = new Author() { Name = AuthorName };
+			_db.Authors.Add(thisAuthor);
 			_db.SaveChanges();
 		}
-// #nullable enable
-//       AuthorBook? joinEntity = _db.AuthorBooks.FirstOrDefault(join => (join.AuthorId == thisAuthor.AuthorId && join.BookId == book.BookId));
-// #nullable disable
-//       if (joinEntity == null && thisAuthor.AuthorId != 0)
-//       {
-//         _db.Books.Add(book);
-//         _db.SaveChanges();
-//         _db.AuthorBooks.Add(new AuthorBook() { AuthorId = thisAuthor.AuthorId, BookId = book.BookId });
-//         _db.SaveChanges();
-//       }
+#nullable enable
+      AuthorBook? joinEntity = _db.AuthorBooks.FirstOrDefault(join => (join.AuthorId == thisAuthor.AuthorId && join.BookId == book.BookId));
+#nullable disable
+      if (joinEntity == null && thisAuthor.AuthorId != 0)
+      {
+        _db.Books.Add(book);
+        _db.SaveChanges();
+        _db.AuthorBooks.Add(new AuthorBook() { AuthorId = thisAuthor.AuthorId, BookId = book.BookId });
+        _db.SaveChanges();
+      }
     return RedirectToAction("Details", new { id = book.BookId });
   }
 
