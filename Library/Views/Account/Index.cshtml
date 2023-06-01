@@ -1,10 +1,13 @@
 @{
   Layout = "_Layout";
+  string role = ViewBag.roleGuy;
 }
 
 
 @if (User.Identity.IsAuthenticated)
 {
+  @if (role== "patron")
+  {
   <h2>Welcome Back</h2>
   <hr />
   <p>Hello @User.Identity.Name!</p>
@@ -12,14 +15,22 @@
   {
     <input type="submit" class="btn btn-primary" value="Log out" />
   }
+  <p>@Html.ActionLink("Books", "Index", "Books")</p>
+  }
+  else if (role == "librarian")
+  {
+    <h2>Welcome Back Nerd</h2>
+    @Html.ActionLink("Add library book", "Create", "Books")
+    @Html.ActionLink("Add author to collection", "Create", "Authors")
+  }
 }
-else
+else 
 {
   <p>@Html.ActionLink("Register", "Register")</p>
   <p>@Html.ActionLink("Log in", "Login")</p>
 }
+@* 
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
-<p>@Html.ActionLink("Books", "Index", "Books")</p>
-<p>@Html.ActionLink("Authors", "Index", "Authors")</p>
+<p>@Html.ActionLink("Authors", "Index", "Authors")</p> *@
 
 
