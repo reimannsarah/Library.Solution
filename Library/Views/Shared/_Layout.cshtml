@@ -12,7 +12,9 @@
   </head>
   <body>
     <div class="main-container">
+      @await Html.PartialAsync("NavBar")
     @RenderBody()
+    </div>
     @* @await Html.PartialAsync("Footer") *@
     </div>
   </body>

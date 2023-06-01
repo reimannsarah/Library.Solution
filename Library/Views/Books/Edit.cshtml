@@ -4,14 +4,15 @@
 
 @model Library.Models.Book
 
-<h2>Add a Book to the Dragon Library</h2>
 @using(Html.BeginForm())
 {
   @Html.LabelFor(model => model.Title)
-  @Html.TextBoxFor(model => model.Title)
+  @Html.EditorFor(model => model.Title)
+
   @Html.LabelFor(model => model.PubYear)
-  @Html.TextBoxFor(model => model.PubYear)
-  <label for="authors">Author:</label>
+  @Html.EditorFor(model => model.PubYear)
+
+  <label for="authors">Author: </label>
   <input type="text" name="author" list="authors">
   <datalist id="authors">
   @foreach (var author in ViewBag.Authors)
@@ -19,5 +20,6 @@
     <option value="@author.Text">@author.Text</option>
   }
   </datalist>
-  <input type="submit" value="Add" />
+
+  <input type="submit" value="Edit" />
 }

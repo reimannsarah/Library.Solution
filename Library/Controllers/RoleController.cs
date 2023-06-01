@@ -4,6 +4,7 @@ using Library.Models;
 using System.Threading.Tasks;
 using Library.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Library.Controllers;
 
@@ -16,7 +17,10 @@ public class RoleController : Controller
     _roleManager = RoleMgr;
   }
 
-  public IActionResult Create() => View();
+  public ActionResult Create()
+  {
+    return View(_roleManager.Roles);
+  }
 
   [HttpPost]
   public async Task<IActionResult> Create([Required] string name)

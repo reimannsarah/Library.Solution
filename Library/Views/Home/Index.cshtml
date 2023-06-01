@@ -2,9 +2,16 @@
   Layout = "_Layout";
 }
 
-<h1>Dragon Library</h1>
-  <p>@Html.ActionLink("Register", "Register", "Account", null, new { @class="btn btn-primary"})</p>
-  <p>@Html.ActionLink("Login", "Login", "Account", null, new { @class="btn btn-primary"})</p>
-  <p>@Html.ActionLink("O", "Create", "Role", null, new { @id = "secret-btn"})</p>
+<div class="splish-img"></div>
+<div class="splash">
+  <h1>Dragon Library</h1>
 
+  @Html.ActionLink("Register", "Register", "Account", null, new { @class="btn btn-primary"})
+  @Html.ActionLink("Login", "Login", "Account", null, new { @class="btn btn-primary"})
+
+  
+
+  <div class="splash-img">@Html.ActionLink("x", "Create", "Role", null, new { @id = "secret-btn"})</div>
+
+</div>
 

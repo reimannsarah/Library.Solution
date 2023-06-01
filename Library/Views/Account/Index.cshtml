@@ -18,8 +18,11 @@ else
   <p>@Html.ActionLink("Register", "Register")</p>
   <p>@Html.ActionLink("Log in", "Login")</p>
 }
+
+@* CRUD routes for librarian *@
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
 <p>@Html.ActionLink("Books", "Index", "Books")</p>
 <p>@Html.ActionLink("Authors", "Index", "Authors")</p>
 
-
+@* Search and checkout routes for users *@
+<p>@Html.ActionLink("Search", "Index", "Search")</p>

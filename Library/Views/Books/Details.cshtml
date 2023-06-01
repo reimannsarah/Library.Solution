@@ -1,5 +1,5 @@
 @{
-  Layout = "_LibrarianLayout";
+  Layout = "_Layout";
 }
 
 @using Library.Models
@@ -26,4 +26,6 @@ else
 {
   <p>Checked Out, that sucks</p>
 }
+
+@Html.ActionLink("Edit", "Edit", new { id = Model.BookId })
 

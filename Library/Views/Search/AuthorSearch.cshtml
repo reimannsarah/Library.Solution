@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+
+<h3>Search by author:</h3>
+
+@using(Html.BeginForm())
+{
+  <label for="author">Author: </label>
+  <input type="text" name="author" id="author" />
+
+  <input type="submit" value="Go" />  
+}
+
+@Html.ActionLink("Back to search", "Index")

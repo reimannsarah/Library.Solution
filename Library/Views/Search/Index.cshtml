@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Search the Dragon Library</h1>
+<hr />
+
+<div class="search-btns">
+@Html.ActionLink("Search by title", "TitleSearch", null,  null, new { @class="btn btn-primary"})
+@Html.ActionLink("Search by author", "AuthorSearch", null,  null, new { @class="btn btn-primary"})
+</div>
+
+@Html.ActionLink("Back", "Index", "Account")
