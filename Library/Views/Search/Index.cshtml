@@ -2,29 +2,12 @@
   Layout = "_Layout";
 }
 
-@using Library.Models
 <h1>Search the Dragon Library</h1>
-
-@Html.ActionLink("Search by title", "TitleSearch", null,  null, new { @class="btn btn-primary"})
-@Html.ActionLink("Search by author", "AuthorSearch", null,  null, new { @class="btn btn-primary"})
-
 <hr />
 
-@* <h2>All books:</h2>
-@if (Model.Count == 0)
-{
-  <p>No books</p>
-}
+<div class="search-btns">
+@Html.ActionLink("Search by title", "TitleSearch", null,  null, new { @class="btn btn-primary"})
+@Html.ActionLink("Search by author", "AuthorSearch", null,  null, new { @class="btn btn-primary"})
+</div>
 
-<ul>
-@foreach (Book book in Model)
-{
-  <li><em>@book.Title</em> by: 
-  @foreach (AuthorBook join in book.AuthorJoinEntities)
-  {
-    <span>@join.Author.Name, </span>
-  }
-  </li>
-}
-</ul> *@
 @Html.ActionLink("Back", "Index", "Account")

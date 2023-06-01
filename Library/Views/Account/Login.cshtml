@@ -3,9 +3,9 @@
 }
 
 @using Library.ViewModels
-
 @model LoginViewModel
 
+<div class="login-container">
 <h2>Log in to your Dragon Library</h2>
 
 @if (!ViewData.ModelState.IsValid)
@@ -13,16 +13,23 @@
   @Html.ValidationSummary("Please fix the following error(s) and resubmit the form:")
 }
 
+@* @using (Html.BeginForm("Account", "Login", FormMethod.Post, new { @class = "login-form" })) *@
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(m => m.Email)
-  @Html.TextBoxFor(m => m.Email)
-
-  @Html.LabelFor(m => m.Password)
-  @Html.EditorFor(m => m.Password)
-
-  <input type="submit" value="Log in" />
+  <div class="login-form">
+    <div class="form-bit">
+      @Html.LabelFor(m => m.Email)
+      @Html.TextBoxFor(m => m.Email)
+    </div>
+    <div class="form-bit">
+      @Html.LabelFor(m => m.Password)
+      @Html.EditorFor(m => m.Password)
+    </div>
+    <input type="submit" value="Log in" class="btn btn-primary"/>
+  </div>
 }
 
 <p>@Html.ActionLink("Register for an account", "Register")</p>
 <p>@Html.ActionLink("Back to accounts page", "Index")</p>
+
+</div> 
