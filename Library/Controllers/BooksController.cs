@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Library.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Library.Controllers;
@@ -34,29 +33,26 @@ public class BooksController : Controller
   [HttpPost]
   public ActionResult Create(Book book, string[] author)
   {
-    // if (author.AuthorId == 0)
-    // {
-
-    // }
     string AuthorName = author[0];
 #nullable enable
     Author? thisAuthor = _db.Authors.FirstOrDefault(author => author.Name == AuthorName);
 #nullable disable
-		if (thisAuthor == null)
-		{
-			_db.Authors.Add( new Author() { Name = AuthorName });
-			_db.SaveChanges();
-		}
-// #nullable enable
-//       AuthorBook? joinEntity = _db.AuthorBooks.FirstOrDefault(join => (join.AuthorId == thisAuthor.AuthorId && join.BookId == book.BookId));
-// #nullable disable
-//       if (joinEntity == null && thisAuthor.AuthorId != 0)
-//       {
-//         _db.Books.Add(book);
-//         _db.SaveChanges();
-//         _db.AuthorBooks.Add(new AuthorBook() { AuthorId = thisAuthor.AuthorId, BookId = book.BookId });
-//         _db.SaveChanges();
-//       }
+    if (thisAuthor == null)
+    {
+      thisAuthor = new Author() { Name = AuthorName };
+      _db.Authors.Add(thisAuthor);
+      _db.SaveChanges();
+    }
+#nullable enable
+    AuthorBook? joinEntity = _db.AuthorBooks.FirstOrDefault(join => (join.AuthorId == thisAuthor.AuthorId && join.BookId == book.BookId));
+#nullable disable
+    if (joinEntity == null && thisAuthor.AuthorId != 0)
+    {
+      _db.Books.Add(book);
+      _db.SaveChanges();
+      _db.AuthorBooks.Add(new AuthorBook() { AuthorId = thisAuthor.AuthorId, BookId = book.BookId });
+      _db.SaveChanges();
+    }
     return RedirectToAction("Details", new { id = book.BookId });
   }
 
