@@ -14,10 +14,11 @@
 @foreach (Book book in Model)
 {
   <li><em>@book.Title</em> by: 
-  @* @foreach (AuthorBook join in book.AuthorJoinEntities)
+  @foreach (AuthorBook join in book.AuthorJoinEntities)
   {
     <span>@join.Author.Name, </span>
-  } *@
+  }
+  @book.PubYear
   </li>
 }
 </ul>
